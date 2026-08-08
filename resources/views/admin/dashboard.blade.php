@@ -1,69 +1,72 @@
 @extends('layouts.app')
 
+@section('title', 'Streaming Analytics')
+
 @section('content')
-<div class="max-w-7xl mx-auto">
+<div class="max-w-7xl mx-auto text-white">
     
-    <!-- Header Dashboard Modern -->
+    <!-- Header Dashboard -->
     <div class="mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-            <h1 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-slate-900 to-slate-600 tracking-tight">Dashboard Analytics</h1>
-            <p class="text-slate-500 font-medium mt-1">Ringkasan performa akses tautan informasi dan tiket konser.</p>
+            <h1 class="text-3xl font-extrabold text-white tracking-tight flex items-center gap-3">
+                <i data-lucide="activity" class="w-8 h-8 text-[#1DB954]"></i>
+                Streaming Analytics
+            </h1>
+            <p class="text-zinc-400 font-medium mt-1">Ringkasan performa audiens dan akses playlist Anda.</p>
         </div>
-        <a href="{{ route('admin.links.index') }}" class="hidden sm:flex bg-slate-900 hover:bg-slate-800 text-white font-semibold py-2.5 px-6 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all items-center gap-2">
-            Kelola Tautan <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        <a href="{{ route('admin.links.index') }}" class="hidden sm:flex bg-[#282828] hover:bg-[#383838] border border-zinc-700 text-white font-semibold py-2.5 px-6 rounded-full transition-all items-center gap-2">
+            Kelola Tracks <i data-lucide="arrow-right" class="w-4 h-4"></i>
         </a>
     </div>
 
-    <!-- 1. SUMMARY CARDS (Colorful Modern) -->
+    <!-- SUMMARY CARDS -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         
-        <!-- Card: Total Tautan (Biru) -->
-        <div class="bg-white border-0 rounded-2xl p-6 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all relative overflow-hidden group">
-            <div class="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-bl-full -z-10 transition-transform group-hover:scale-110"></div>
-            <div class="bg-gradient-to-br from-blue-500 to-indigo-600 w-14 h-14 rounded-xl flex items-center justify-center mb-4 shadow-lg shadow-blue-500/30 text-white">
-                <i data-lucide="link" class="w-7 h-7"></i>
+        <!-- Card 1: Total Tracks -->
+        <div class="bg-[#181818] border border-zinc-800 rounded-2xl p-6 shadow-lg hover:bg-[#282828] transition-all group">
+            <div class="bg-blue-500/10 w-12 h-12 rounded-full flex items-center justify-center mb-4 text-blue-500 group-hover:scale-110 transition-transform">
+                <i data-lucide="list-music" class="w-6 h-6"></i>
             </div>
-            <h3 class="text-sm font-bold text-slate-500 uppercase tracking-wider mb-1">Total Tautan</h3>
+            <h3 class="text-sm font-bold text-zinc-400 uppercase tracking-wider mb-1">Total Tracks</h3>
             <div class="flex items-baseline gap-2">
-                <span class="text-4xl font-extrabold text-slate-800">{{ $totalLinks }}</span>
-                <span class="text-sm font-semibold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-md">({{ $activeLinks }} Aktif)</span>
+                <span class="text-4xl font-extrabold text-white">{{ $totalLinks ?? 0 }}</span>
+                <span class="text-sm font-medium text-zinc-500">({{ $activeLinks ?? 0 }} Aktif)</span>
             </div>
         </div>
 
-        <!-- Card: Total Klik (Hijau Zamrud) -->
-        <div class="bg-white border-0 rounded-2xl p-6 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all relative overflow-hidden group">
-            <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-50 rounded-bl-full -z-10 transition-transform group-hover:scale-110"></div>
-            <div class="bg-gradient-to-br from-emerald-400 to-teal-500 w-14 h-14 rounded-xl flex items-center justify-center mb-4 shadow-lg shadow-emerald-500/30 text-white">
-                <i data-lucide="mouse-pointer-click" class="w-7 h-7"></i>
+        <!-- Card 2: Total Streams -->
+        <div class="bg-[#181818] border border-zinc-800 rounded-2xl p-6 shadow-lg hover:bg-[#282828] transition-all group">
+            <div class="bg-[#1DB954]/10 w-12 h-12 rounded-full flex items-center justify-center mb-4 text-[#1DB954] group-hover:scale-110 transition-transform">
+                <i data-lucide="headphones" class="w-6 h-6"></i>
             </div>
-            <h3 class="text-sm font-bold text-slate-500 uppercase tracking-wider mb-1">Total Akses Tautan</h3>
-            <span class="text-4xl font-extrabold text-slate-800">{{ $totalClicks }}</span>
+            <h3 class="text-sm font-bold text-zinc-400 uppercase tracking-wider mb-1">Total Streams (Klik)</h3>
+            <span class="text-4xl font-extrabold text-white">{{ $totalClicks ?? 0 }}</span>
         </div>
 
-        <!-- Card: Top Link (Kuning/Amber) -->
-        <div class="bg-white border-0 rounded-2xl p-6 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all relative overflow-hidden group">
-            <div class="absolute top-0 right-0 w-32 h-32 bg-amber-50 rounded-bl-full -z-10 transition-transform group-hover:scale-110"></div>
-            <div class="bg-gradient-to-br from-amber-400 to-orange-500 w-14 h-14 rounded-xl flex items-center justify-center mb-4 shadow-lg shadow-amber-500/30 text-white">
-                <i data-lucide="trophy" class="w-7 h-7"></i>
+        <!-- Card 3: Top Track -->
+        <div class="bg-[#181818] border border-zinc-800 rounded-2xl p-6 shadow-lg hover:bg-[#282828] transition-all group">
+            <div class="bg-purple-500/10 w-12 h-12 rounded-full flex items-center justify-center mb-4 text-purple-400 group-hover:scale-110 transition-transform">
+                <i data-lucide="flame" class="w-6 h-6"></i>
             </div>
-            <h3 class="text-sm font-bold text-slate-500 uppercase tracking-wider mb-1">Tautan Terpopuler</h3>
-            @if($topLink)
-                <p class="text-lg font-extrabold text-slate-800 truncate mb-2">{{ $topLink->title }}</p>
-                <p class="text-xs font-bold text-orange-700 bg-orange-100 inline-block px-3 py-1.5 rounded-lg">{{ $topLink->clicks }} Total Klik</p>
+            <h3 class="text-sm font-bold text-zinc-400 uppercase tracking-wider mb-1">Top Track</h3>
+            @if(isset($topLink) && $topLink)
+                <p class="text-lg font-extrabold text-white truncate mb-1">{{ $topLink->title }}</p>
+                <p class="text-sm font-medium text-[#1DB954] flex items-center gap-1">
+                    <i data-lucide="play-circle" class="w-4 h-4"></i> {{ $topLink->clicks }} Plays
+                </p>
             @else
-                <p class="text-lg font-extrabold text-slate-800">Belum ada data</p>
+                <p class="text-lg font-extrabold text-zinc-500">Belum ada data</p>
             @endif
         </div>
-
     </div>
 
-    <!-- 2 & 3. CHARTS AREA -->
+    <!-- CHARTS AREA -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-12">
         
         <!-- Bar Chart -->
-        <div class="bg-white border-0 rounded-2xl p-6 shadow-md flex flex-col">
-            <h3 class="text-base font-extrabold text-slate-800 mb-6 uppercase tracking-wider flex items-center gap-2">
-                <i data-lucide="bar-chart-2" class="w-5 h-5 text-indigo-500"></i> Perbandingan Klik
+        <div class="bg-[#181818] border border-zinc-800 rounded-2xl p-6 shadow-lg flex flex-col">
+            <h3 class="text-base font-bold text-white mb-6 uppercase tracking-wider flex items-center gap-2">
+                <i data-lucide="bar-chart-2" class="w-5 h-5 text-[#1DB954]"></i> Performa Tracks
             </h3>
             <div class="relative w-full h-72">
                 <canvas id="barChart"></canvas>
@@ -71,38 +74,45 @@
         </div>
 
         <!-- Doughnut Chart -->
-        <div class="bg-white border-0 rounded-2xl p-6 shadow-md flex flex-col">
-            <h3 class="text-base font-extrabold text-slate-800 mb-6 uppercase tracking-wider flex items-center gap-2">
-                <i data-lucide="pie-chart" class="w-5 h-5 text-pink-500"></i> Distribusi Minat Audiens
+        <div class="bg-[#181818] border border-zinc-800 rounded-2xl p-6 shadow-lg flex flex-col">
+            <h3 class="text-base font-bold text-white mb-6 uppercase tracking-wider flex items-center gap-2">
+                <i data-lucide="pie-chart" class="w-5 h-5 text-purple-400"></i> Distribusi Klik
             </h3>
             <div class="relative w-full h-72 flex justify-center items-center">
                 <canvas id="doughnutChart"></canvas>
             </div>
         </div>
-
     </div>
 </div>
 
-<!-- ========================================== -->
-<!-- SCRIPT CHART.JS COLORFUL MODERN            -->
-<!-- ========================================== -->
+<!-- Script Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    const chartLabels = @json($chartLabels);
-    const chartData = @json($chartData);
+    // Memastikan data aman jika kosong
+    const chartLabels = @json($chartLabels ?? []);
+    const chartData = @json($chartData ?? []);
 
-    // Palet Warna Festival Vibrant & Kontras
+    // Palet Warna Dark Mode khas aplikasi musik (Spotify Green, Purple, Blue, dll)
     const bgColors = [
-        'rgba(59, 130, 246, 0.8)',   // Biru
-        'rgba(16, 185, 129, 0.8)',   // Zamrud
-        'rgba(245, 158, 11, 0.8)',   // Kuning
-        'rgba(236, 72, 153, 0.8)',   // Pink
-        'rgba(139, 92, 246, 0.8)'    // Ungu
+        'rgba(29, 185, 84, 0.8)',   // #1DB954 (Spotify Green)
+        'rgba(139, 92, 246, 0.8)',  // Purple
+        'rgba(59, 130, 246, 0.8)',  // Blue
+        'rgba(236, 72, 153, 0.8)',  // Pink
+        'rgba(245, 158, 11, 0.8)'   // Amber
     ];
-    const borderColors = ['#2563eb', '#059669', '#d97706', '#db2777', '#7c3aed'];
+    
+    // Warna border sedikit lebih solid dari background-nya
+    const borderColors = [
+        '#1DB954', 
+        '#8b5cf6', 
+        '#3b82f6', 
+        '#ec4899', 
+        '#f59e0b'
+    ];
 
-    Chart.defaults.font.family = 'Inter, sans-serif';
-    Chart.defaults.color = '#64748b';
+    // Setup global font color untuk mode gelap
+    Chart.defaults.font.family = 'Inter, ui-sans-serif, system-ui, sans-serif';
+    Chart.defaults.color = '#a1a1aa'; // zinc-400
 
     // 1. BAR CHART
     const ctxBar = document.getElementById('barChart').getContext('2d');
@@ -111,12 +121,12 @@
         data: {
             labels: chartLabels,
             datasets: [{
-                label: 'Jumlah Klik',
+                label: 'Total Plays',
                 data: chartData,
                 backgroundColor: bgColors,
                 borderColor: borderColors,
-                borderWidth: 2,
-                borderRadius: 6,
+                borderWidth: 1,
+                borderRadius: 4, // Ujung bar agak melengkung
             }]
         },
         options: {
@@ -126,14 +136,24 @@
                 y: {
                     beginAtZero: true,
                     ticks: { precision: 0 },
-                    grid: { color: '#f1f5f9', drawBorder: false }
+                    grid: { 
+                        color: '#27272a', // Garis grid gelap (zinc-800)
+                        drawBorder: false 
+                    } 
                 },
                 x: {
                     grid: { display: false, drawBorder: false }
                 }
             },
             plugins: {
-                legend: { display: false }
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: '#282828',
+                    titleColor: '#fff',
+                    bodyColor: '#1DB954',
+                    borderColor: '#3f3f46',
+                    borderWidth: 1
+                }
             }
         }
     });
@@ -147,17 +167,30 @@
             datasets: [{
                 data: chartData,
                 backgroundColor: bgColors,
-                borderColor: '#ffffff',
+                borderColor: '#181818', // Warna border menyesuaikan warna card agar terlihat "terpotong"
                 borderWidth: 4,
-                hoverOffset: 8
+                hoverOffset: 4
             }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            cutout: '75%', 
+            cutout: '75%', // Lubang tengah lebih besar ala UI modern
             plugins: {
-                legend: { position: 'right' }
+                legend: { 
+                    position: 'right', 
+                    labels: { 
+                        color: '#a1a1aa',
+                        padding: 20
+                    } 
+                },
+                tooltip: {
+                    backgroundColor: '#282828',
+                    titleColor: '#fff',
+                    bodyColor: '#1DB954',
+                    borderColor: '#3f3f46',
+                    borderWidth: 1
+                }
             }
         }
     });
